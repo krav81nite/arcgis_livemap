@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mapa de Nuvens - Windy</title>
+  <style>
+    html, body, #windy {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+  </style>
+  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+</head>
+<body>
+  <div id="windy"></div>
+
+  <script>
+    const options = {
+      key: 'vFTw4ZaN9QXPXPZT5zsstmvSGnqUHO69',
+      lat: 39.5,       // Latitude de Portugal
+      lon: -8.0,        // Longitude de Portugal
+      zoom: 6,
+      overlay: 'clouds', // Camada de nuvens
+      timestamp: Date.now()
+    };
+
+    windyInit(options, function (windyAPI) {
+      // Mapa carregado
+    });
+  </script>
+</body>
+</html>
