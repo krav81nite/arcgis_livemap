@@ -20,30 +20,23 @@
 
   <script>
     const options = {
-      key: 'vFTw4ZaN9QXPXPZT5zsstmvSGnqUHO69', // Tua chave Windy
+      key: 'vFTw4ZaN9QXPXPZT5zsstmvSGnqUHO69',
       lat: 39.5,
       lon: -8.0,
       zoom: 7,
       overlay: 'clouds'
     };
 
-    windyInit(options, function (windyAPI) {
+    windyInit(options, function(windyAPI) {
       const { map } = windyAPI;
 
-      // Adiciona camada Feature Layer do ArcGIS com pontos e popups
       L.esri.featureLayer({
         url: 'https://services.arcgis.com/UJ3TLmT9BhE4Cj52/arcgis/rest/services/Zonas_Observacao_Turismo/FeatureServer/0',
-        pointToLayer: function (geojson, latlng) {
-          return L.circleMarker(latlng, {
-            radius: 6,
-            fillColor: "#ff6600",
-            color: "#000",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
-          });
-        },
-        onEachFeature: function (feature, layer) {
+        pointToLayer: (geojson, latlng) => L.circleMarker(latlng, {
+          radius: 6, fillColor: "#ff6600", color: "#000", weight: 1,
+          opacity: 1, fillOpacity: 0.8
+        }),
+        onEachFeature: (feature, layer) => {
           const nome = feature.properties.Nome || "Sem nome";
           const classif = feature.properties.Classificacao || "Sem classificação";
           const desc = feature.properties.Descricao || "";
