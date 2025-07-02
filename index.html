@@ -1,54 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Mapa de Nuvens + Zonas de Observação</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>
-    html, body, #windy {
-      height: 100%;
-      margin: 0;
-    }
-  </style>
+    <title>Mapa de Nuvens Windy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Define que o mapa da Windy vai ocupar 100% da largura e altura do corpo */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Evita barras de scroll indesejadas */
+        }
+        #windy {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-  <div id="windy"></div>
+    <div id="windy"></div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
-  <script src="https://unpkg.com/esri-leaflet@3.0.11/dist/esri-leaflet.js"></script>
-
-  <script>
-    const options = {
-      key: 'iq6kSRN7NqNuaZKP3MX5bZnS9X5grKVn',
-      lat: 39.5,
-      lon: -8.0,
-      zoom: 7,
-      overlay: 'clouds'
-    };
-
-    windyInit(options, function(windyAPI) {
-      const { map } = windyAPI;
-
-      L.esri.featureLayer({
-        url: 'https://services.arcgis.com/UJ3TLmT9BhE4Cj52/arcgis/rest/services/Zonas_Observacao_Turismo/FeatureServer/0',
-        pointToLayer: (geojson, latlng) => L.circleMarker(latlng, {
-          radius: 6,
-          fillColor: "#ff6600",
-          color: "#000",
-          weight: 1,
-          opacity: 1,
-          fillOpacity: 0.8
-        }),
-        onEachFeature: (feature, layer) => {
-          const nome = feature.properties.Nome || "Sem nome";
-          const classif = feature.properties.Classificacao || "Sem classificação";
-          const desc = feature.properties.Descricao || "";
-          layer.bindPopup(`<strong>${nome}</strong><br/>Classificação: ${classif}<br/>${desc}`);
+    <script type="text/javascript">
+        // Função para carregar a API da Windy
+        function loadWindyAPI() {
+            const script = document.createElement('script');
+            script.src = 'https://www.windy.com/plugins/api/4.0/windy.js';
+            script.onload = initWindy; // Chama initWindy quando a API carregar
+            document.head.appendChild(script);
         }
-      }).addTo(map);
-    });
-  </script>
+
+        // Função para inicializar o mapa da Windy
+        function initWindy() {
+            // SUBSTITUA 'SUA_CHAVE_WINDY' PELA SUA CHAVE REAL DA API
+            // Pode ajustar lat, lon e zoom para a área de Portugal
+            // Exemplo de coordenadas para o centro de Portugal
+            const portugalLat = 39.5;
+            const portugalLon = -8.0;
+            const initialZoom = 6; // Ajuste o zoom conforme necessário
+
+            windyInit({
+                key: 'iq6kSRN7NqNuaZKP3MX5bZnS9X5grKVn', // <<<< ATUALIZE AQUI COM A SUA CHAVE DA WINDY
+                verbose: true, // Útil para depuração, pode remover em produção
+                lat: portugalLat,
+                lon: portugalLon,
+                zoom: initialZoom,
+                mount: 'windy', // ID do elemento DIV onde o mapa será montado
+                // Escolha a camada de nuvens
+                overlay: 'clouds', // 'clouds' para nuvens gerais, 'clouds_total' para cobertura total
+                // Pode adicionar outras configurações aqui, como data, horas, etc.
+                // product: 'forecast', // Pode ser 'current' para dados mais recentes
+                // Para mais opções, veja a documentação da API da Windy
+                // https://www.windy.com/plugins/api/4.0/docs
+            });
+        }
+
+        // Inicia o carregamento da API da Windy
+        loadWindyAPI();
+    </script>
 </body>
 </html>
-
