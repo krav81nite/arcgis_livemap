@@ -1,4 +1,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://api.windy.com; style-src 'self' 'unsafe-inline';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://api.windy.com https://www.windy.com; style-src 'self' 'unsafe-inline'; img-src * data:; font-src 'self'; connect-src *"
