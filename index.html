@@ -33,8 +33,12 @@
       L.esri.featureLayer({
         url: 'https://services.arcgis.com/UJ3TLmT9BhE4Cj52/arcgis/rest/services/Zonas_Observacao_Turismo/FeatureServer/0',
         pointToLayer: (geojson, latlng) => L.circleMarker(latlng, {
-          radius: 6, fillColor: "#ff6600", color: "#000", weight: 1,
-          opacity: 1, fillOpacity: 0.8
+          radius: 6,
+          fillColor: "#ff6600",
+          color: "#000",
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.8
         }),
         onEachFeature: (feature, layer) => {
           const nome = feature.properties.Nome || "Sem nome";
@@ -47,3 +51,4 @@
   </script>
 </body>
 </html>
+
