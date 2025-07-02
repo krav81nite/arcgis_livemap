@@ -1,63 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-    <title>Mapa de Nuvens Windy</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Define que o mapa da Windy vai ocupar 100% da largura e altura do corpo */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* Evita barras de scroll indesejadas */
-        }
-        #windy {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mapa de Nuvens - Windy</title>
 </head>
-<body>
-    <div id="windy"></div>
+<body style="margin: 0; padding: 0;">
 
-    <script type="text/javascript">
-        // Função para carregar a API da Windy
-        function loadWindyAPI() {
-            const script = document.createElement('script');
-            script.src = 'https://www.windy.com/plugins/api/4.0/windy.js';
-            script.onload = initWindy; // Chama initWindy quando a API carregar
-            document.head.appendChild(script);
-        }
+  <h2 style="text-align: center;">Previsão de Nuvens - Portugal (via Windy)</h2>
 
-        // Função para inicializar o mapa da Windy
-        function initWindy() {
-            // SUBSTITUA 'SUA_CHAVE_WINDY' PELA SUA CHAVE REAL DA API
-            // Pode ajustar lat, lon e zoom para a área de Portugal
-            // Exemplo de coordenadas para o centro de Portugal
-            const portugalLat = 39.5;
-            const portugalLon = -8.0;
-            const initialZoom = 6; // Ajuste o zoom conforme necessário
+  <iframe
+    width="100%"
+    height="600"
+    src="https://embed.windy.com/embed2.html?lat=38.7&lon=-9.1&detailLat=38.7&detailLon=-9.1&width=100%&height=600&zoom=7&level=surface&overlay=clouds&menu=&message=true&marker=&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=default&radarRange=-1"
+    frameborder="0">
+  </iframe>
 
-            windyInit({
-                key: 'iq6kSRN7NqNuaZKP3MX5bZnS9X5grKVn', // <<<< ATUALIZE AQUI COM A SUA CHAVE DA WINDY
-                verbose: true, // Útil para depuração, pode remover em produção
-                lat: portugalLat,
-                lon: portugalLon,
-                zoom: initialZoom,
-                mount: 'windy', // ID do elemento DIV onde o mapa será montado
-                // Escolha a camada de nuvens
-                overlay: 'clouds', // 'clouds' para nuvens gerais, 'clouds_total' para cobertura total
-                // Pode adicionar outras configurações aqui, como data, horas, etc.
-                // product: 'forecast', // Pode ser 'current' para dados mais recentes
-                // Para mais opções, veja a documentação da API da Windy
-                // https://www.windy.com/plugins/api/4.0/docs
-            });
-        }
-
-        // Inicia o carregamento da API da Windy
-        loadWindyAPI();
-    </script>
 </body>
 </html>
+
